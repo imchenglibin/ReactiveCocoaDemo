@@ -34,18 +34,16 @@
     RAC(_userViewModel.user, password) = self.passwordTextField.rac_textSignal;
     self.loginButton.rac_command = _userViewModel.loginCommand;
     @weakify(self)
-    [self.loginButton.rac_command.executionSignals subscribeNext:^(id x) {
+    [self.loginButton.rac_command.executionSignals subscribeNext:^(RACSignal* signal) {
         @strongify(self)
         [self.usernameTextField resignFirstResponder];
         [self.passwordTextField resignFirstResponder];
         [self.indicatorView startAnimating];
-    }];
-    
-    [self.loginButton.rac_command.executionSignals.switchToLatest subscribeNext:^(id x) {
-        @strongify(self)
-        [self.indicatorView stopAnimating];
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示框" message:@"登录成功" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-        [alertView show];
+        [signal subscribeNext:^(id x) {
+            [self.indicatorView stopAnimating];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示框" message:@"登录成功" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+            [alertView show];
+        }];
     }];
     
     [self.loginButton.rac_command.errors subscribeNext:^(id x) {
