@@ -1,2 +1,2 @@
 # ReactiveCocoaDemo
-简单的Reactivecocoa样例
+简单的基于MVVM模式的Reactivecocoa样例
