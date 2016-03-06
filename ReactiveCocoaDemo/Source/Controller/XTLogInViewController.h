@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface XTMainViewController : UIViewController
+@interface XTLogInViewController : UIViewController
 
 @end

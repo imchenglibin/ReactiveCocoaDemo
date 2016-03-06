@@ -7,7 +7,7 @@
 //
 
 #import "XTAppDelegate.h"
-#import "XTMainViewController.h"
+#import "XTLogInViewController.h"
 
 @interface XTAppDelegate ()
 
@@ -17,7 +17,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    UIViewController *rootController = [[XTMainViewController alloc] init];
+    UIViewController *rootController = [[XTLogInViewController alloc] init];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:rootController];
     self.window.rootViewController = navController;
     [self.window makeKeyAndVisible];

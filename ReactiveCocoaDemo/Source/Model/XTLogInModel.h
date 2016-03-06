@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@interface XTUser : NSObject
-@property (copy, nonatomic) NSString *username;
-@property (copy, nonatomic) NSString *password;
+@interface XTLogInModel : NSObject
+@property (copy, nonatomic, readonly) NSString *username;
+@property (copy, nonatomic, readonly) NSString *password;
 
 - (instancetype)initWithUsername:(NSString*)username password:(NSString*)password;
-+ (instancetype)userWithUsername:(NSString*)username password:(NSString*)password;
++ (instancetype)logInModelWithUsername:(NSString*)username password:(NSString*)password;
 @end

@@ -6,20 +6,20 @@
 //  Copyright © 2016年 imchenglibin. All rights reserved.
 //
 
-#import "XTMainViewController.h"
-#import "XTUser.h"
-#import "XTUserViewModel.h"
+#import "XTLogInViewController.h"
+#import "XTLogInModel.h"
+#import "XTLogInViewModel.h"
 #import <ReactiveCocoa.h>
 
-@interface XTMainViewController ()
-@property (strong, nonatomic) XTUserViewModel *userViewModel;
+@interface XTLogInViewController ()
+@property (strong, nonatomic) XTLogInViewModel *viewModel;
 @property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
 @property (strong, nonatomic) UIActivityIndicatorView *indicatorView;
 @end
 
-@implementation XTMainViewController
+@implementation XTLogInViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -29,10 +29,13 @@
     self.indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     [self.view addSubview:self.indicatorView];
     
-    _userViewModel = [[XTUserViewModel alloc] init];
-    RAC(_userViewModel.user, username) = self.usernameTextField.rac_textSignal;
-    RAC(_userViewModel.user, password) = self.passwordTextField.rac_textSignal;
-    self.loginButton.rac_command = _userViewModel.loginCommand;
+    self.viewModel = [[XTLogInViewModel alloc] initWithModel:[[XTLogInModel alloc] init]];
+    
+    RAC(self.viewModel.model, username) = self.usernameTextField.rac_textSignal;
+    RAC(self.viewModel.model, password) = self.passwordTextField.rac_textSignal;
+    
+    self.loginButton.rac_command = self.viewModel.loginCommand;
+    
     @weakify(self)
     [self.loginButton.rac_command.executionSignals subscribeNext:^(id x) {
         @strongify(self)

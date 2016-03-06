@@ -6,9 +6,9 @@
 //  Copyright © 2016年 imchenglibin. All rights reserved.
 //
 
-#import "XTUser.h"
+#import "XTLogInModel.h"
 
-@implementation XTUser
+@implementation XTLogInModel
 
 - (instancetype)initWithUsername:(NSString*)username password:(NSString*)password {
     if (self = [super init]) {
@@ -18,7 +18,7 @@
     return self;
 }
 
-+ (instancetype)userWithUsername:(NSString*)username password:(NSString*)password {
++ (instancetype)logInModelWithUsername:(NSString*)username password:(NSString*)password {
     return [[self alloc] initWithUsername:username password:password];
 }
 
